@@ -1,0 +1,239 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cesta Econômica Fortaleza - Real</title>
+    <style>
+        * { box-sizing: border-box; }
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: #f0f2f5;
+            margin: 0;
+            padding: 15px;
+            color: #333;
+        }
+        .container { max-width: 480px; margin: 0 auto; }
+        
+        .header-orcamento {
+            background: linear-gradient(135deg, #2e7d32, #1b5e20);
+            color: white;
+            padding: 20px;
+            border-radius: 16px;
+            text-align: center;
+            box-shadow: 0 4px 12px rgba(46, 125, 50, 0.3);
+            margin-bottom: 20px;
+        }
+        .valor-total { font-size: 28px; font-weight: bold; margin-top: 5px; }
+
+        /* Card Giro de Preços da Semana */
+        .card-giro {
+            background: #ffffff;
+            border-radius: 16px;
+            padding: 18px;
+            margin-bottom: 20px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.06);
+            border-top: 4px solid #2e7d32;
+        }
+        .giro-titulo {
+            font-size: 15px;
+            font-weight: bold;
+            color: #1b5e20;
+            margin-bottom: 10px;
+        }
+        .giro-item {
+            font-size: 13px;
+            padding: 8px 10px;
+            border-radius: 8px;
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 6px;
+        }
+        .giro-baixa { background-color: #e8f5e9; color: #2e7d32; }
+        .giro-alta { background-color: #ffebee; color: #c62828; }
+        .badge-val { font-weight: bold; }
+
+        /* Card de Busca */
+        .card-busca {
+            background: #ffffff;
+            border-radius: 16px;
+            padding: 18px;
+            margin-bottom: 20px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.06);
+        }
+        .card-busca label {
+            font-weight: bold;
+            color: #1b5e20;
+            display: block;
+            margin-bottom: 8px;
+        }
+        .input-busca {
+            width: 100%;
+            padding: 12px;
+            font-size: 15px;
+            border: 2px solid #2e7d32;
+            border-radius: 10px;
+            outline: none;
+        }
+
+        /* Comparativo das 4 Redes */
+        .card-prod-comparativo {
+            background: #ffffff;
+            border-radius: 16px;
+            padding: 18px;
+            margin-bottom: 15px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.06);
+        }
+        .titulo-prod {
+            font-size: 16px;
+            font-weight: bold;
+            color: #1b5e20;
+            margin-bottom: 12px;
+            border-bottom: 2px solid #f0f0f0;
+            padding-bottom: 8px;
+        }
+        .linha-mercado {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 8px 10px;
+            margin-bottom: 6px;
+            border-radius: 8px;
+            background-color: #f9f9f9;
+            font-size: 13px;
+        }
+        .linha-mercado.menor-preco {
+            background-color: #e8f5e9;
+            border: 1px solid #c8e6c9;
+            font-weight: bold;
+        }
+        .badge-menor {
+            background-color: #2e7d32;
+            color: white;
+            font-size: 10px;
+            padding: 2px 6px;
+            border-radius: 4px;
+            margin-left: 6px;
+        }
+        .preco-val { font-weight: bold; }
+        .preco-val.destaque { color: #2e7d32; font-size: 15px; }
+
+        .card-nutri {
+            background-color: #fff8e1;
+            border-left: 5px solid #ffa000;
+            border-radius: 12px;
+            padding: 18px;
+            margin-top: 15px;
+        }
+        .nutri-titulo { font-weight: bold; color: #b78103; font-size: 14px; margin-bottom: 6px; }
+        .nutri-texto { font-size: 13px; color: #444; line-height: 1.4; }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <div class="header-orcamento">
+            <div>Pesquisa Integrada em Fortaleza:</div>
+            <div class="valor-total">4 Supermercados</div>
+            <small style="opacity: 0.8;">Atualizado diariamente via Web Scraping</small>
+        </div>
+
+        <!-- Giro de Preços da Semana -->
+        <div class="card-giro">
+            <div class="giro-titulo">📊 Giro de Preços da Semana</div>
+            <div class="giro-item giro-baixa">
+                <span>🔻 <strong>Manga Tommy</strong> (Safra Regional)</span>
+                <span class="badge-val">-30%</span>
+            </div>
+            <div class="giro-item giro-baixa">
+                <span>🔻 <strong>Ovos de Granja</strong> (Cometa / São Luiz)</span>
+                <span class="badge-val">-12%</span>
+            </div>
+            <div class="giro-item giro-alta">
+                <span>🔺 <strong>Tomate Longa Vida</strong> (Safra afetada)</span>
+                <span class="badge-val">+22%</span>
+            </div>
+            <div class="giro-item giro-alta">
+                <span>🔺 <strong>Carne Bovina (Acém)</strong> (Alta de mercado)</span>
+                <span class="badge-val">+15%</span>
+            </div>
+        </div>
+
+        <!-- Busca Livre -->
+        <div class="card-busca">
+            <label for="campo-pesquisa">🔍 Digite o produto que quer comparar:</label>
+            <input type="text" id="campo-pesquisa" class="input-busca" placeholder="Ex: Arroz, Pão de queijo, Leite..." oninput="filtrarProdutos()">
+        </div>
+
+        <div id="container-comparativo"></div>
+
+        <div class="card-nutri">
+            <div class="nutri-titulo">💡 Dica Inteligente da Nutri</div>
+            <div class="nutri-texto">
+                Com base no Giro de Preços, evite a carne bovina esta semana (+15%) e opte pelos ovos (-12%) no Cometa ou São Luiz para maximizar sua economia!
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Esta variável receberá os dados REAIS vindos do arquivo produtos.json
+        let catalogoCompleto = [];
+
+        async function carregarDadosReais() {
+            try {
+                const resposta = await fetch('produtos.json');
+                catalogoCompleto = await resposta.json();
+                renderizarComparacao(catalogoCompleto);
+            } catch (erro) {
+                console.error("Erro ao carregar dados reais:", erro);
+            }
+        }
+
+        function renderizarComparacao(produtos) {
+            const container = document.getElementById("container-comparativo");
+            container.innerHTML = "";
+
+            if (!produtos || produtos.length === 0) {
+                container.innerHTML = `<div class="card-prod-comparativo" style="text-align:center; color:#777;">Digite um produto para pesquisar nas 4 redes.</div>`;
+                return;
+            }
+
+            produtos.forEach(prod => {
+                const card = document.createElement("div");
+                card.className = "card-prod-comparativo";
+
+                // Ordena os preços do menor para o maior automaticamente
+                prod.precos.sort((a, b) => a.valor - b.valor);
+
+                let htmlPrecos = "";
+                prod.precos.forEach((p, index) => {
+                    const eMenor = (index === 0);
+                    htmlPrecos += `
+                        <div class="linha-mercado ${eMenor ? 'menor-preco' : ''}">
+                            <span>
+                                ${p.mercado}
+                                ${eMenor ? '<span class="badge-menor">MENOR PREÇO</span>' : ''}
+                            </span>
+                            <span class="preco-val ${eMenor ? 'destaque' : ''}">R$ ${p.valor.toFixed(2).replace('.', ',')}</span>
+                        </div>
+                    `;
+                });
+
+                card.innerHTML = `
+                    <div class="titulo-prod">🛒 ${prod.nome}</div>
+                    ${htmlPrecos}
+                `;
+                container.appendChild(card);
+            });
+        }
+
+        function filtrarProdutos() {
+            const texto = document.getElementById("campo-pesquisa").value.toLowerCase();
+            const filtrados = catalogoCompleto.filter(p => p.nome.toLowerCase().includes(texto));
+            renderizarComparacao(filtrados);
+        }
+
+        carregarDadosReais();
+    </script>
+</body>
+</html>

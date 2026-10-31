@@ -142,7 +142,7 @@
         <input 
           type="text" 
           id="searchInput" 
-          placeholder="Ex: Arroz integral, Feijão preto..." 
+          placeholder="Ex: Penne, Espaguete, Feijão..." 
           onkeypress="tratarEnter(event)"
         />
         <button class="btn-buscar" onclick="pesquisarProduto()">Buscar</button>
@@ -155,24 +155,31 @@
   </div>
 
   <script>
-    // Base de dados expandida com produtos especificados e dicas técnicas
+    // Catálogo detalhado de insumos
     const produtos = [
       // ARROZ
-      { nome: "Arroz Branco Tipo 1 (1kg)", precoCometa: "R$ 4,89", precoSaoLuiz: "R$ 5,29", precoCenterbox: "R$ 4,99", precoFrangolandia: "R$ 5,10", dicaNutri: "Passa por polimento (perde fibras e minerais). Combine sempre com legumes ou feijão para reduzir o impacto glicêmico." },
-      { nome: "Arroz Integral (1kg)", precoCometa: "R$ 6,50", precoSaoLuiz: "R$ 6,90", precoCenterbox: "R$ 6,30", precoFrangolandia: "R$ 6,70", dicaNutri: "Preserva a película externa e o gérmen. Rica fonte de fibras B e magnésio, auxiliando na saciedade e trânsito intestinal." },
-      { nome: "Arroz Parboilizado (1kg)", precoCometa: "R$ 5,20", precoSaoLuiz: "R$ 5,60", precoCenterbox: "R$ 5,15", precoFrangolandia: "R$ 5,40", dicaNutri: "Passa por tratamento térmico natural que fixa vitaminas do complexo B no grão antes do polimento. Mais nutritivo que o branco." },
+      { nome: "Arroz Branco Tipo 1 (1kg)", precoCometa: "R$ 4,89", precoSaoLuiz: "R$ 5,29", precoCenterbox: "R$ 4,99", precoFrangolandia: "R$ 5,10", dicaNutri: "Rico em amido e rápido suporte energético. Combine com vegetais folhosos para equilibrar a carga glicêmica." },
+      { nome: "Arroz Integral (1kg)", precoCometa: "R$ 6,50", precoSaoLuiz: "R$ 6,90", precoCenterbox: "R$ 6,30", precoFrangolandia: "R$ 6,70", dicaNutri: "Excelente aporte de fibras e minerais (magnésio e fósforo). Auxilia no controle do colesterol e saciedade." },
+      { nome: "Arroz Parboilizado (1kg)", precoCometa: "R$ 5,20", precoSaoLuiz: "R$ 5,60", precoCenterbox: "R$ 5,15", precoFrangolandia: "R$ 5,40", dicaNutri: "Passa por processo hidrotérmico que retém as vitaminas do complexo B dentro do grão." },
 
       // FEIJÃO
-      { nome: "Feijão Carioca (1kg)", precoCometa: "R$ 7,50", precoSaoLuiz: "R$ 7,90", precoCenterbox: "R$ 7,20", precoFrangolandia: "R$ 7,49", dicaNutri: "Excelente fonte de ferro não-heme e proteínas. Dica: deixe de molho por 12h com limão para eliminar antinutrientes e evitar gases." },
-      { nome: "Feijão Preto (1kg)", precoCometa: "R$ 7,90", precoSaoLuiz: "R$ 8,30", precoCenterbox: "R$ 7,80", precoFrangolandia: "R$ 8,10", dicaNutri: "Rico em antocianinas (antioxidantes que dão a cor escura). Excelente para a saúde cardiovascular." },
-      { nome: "Feijão de Corda / Macáçar (1kg)", precoCometa: "R$ 8,20", precoSaoLuiz: "R$ 8,60", precoCenterbox: "R$ 8,00", precoFrangolandia: "R$ 8,40", dicaNutri: "Muito tradicional no Nordeste, possui baixo teor de gordura e alto teor de fósforo e magnésio." },
+      { nome: "Feijão Carioca (1kg)", precoCometa: "R$ 7,50", precoSaoLuiz: "R$ 7,90", precoCenterbox: "R$ 7,20", precoFrangolandia: "R$ 7,49", dicaNutri: "Ótima fonte de proteína vegetal e ferro não-heme. Consuma junto com frutas cítricas para aumentar a absorção do ferro." },
+      { nome: "Feijão Preto (1kg)", precoCometa: "R$ 7,90", precoSaoLuiz: "R$ 8,30", precoCenterbox: "R$ 7,80", precoFrangolandia: "R$ 8,10", dicaNutri: "Rico em antioxidantes como antocianinas. Lembre-se do remolho mínimo de 12 horas para eliminar fitatos." },
+      { nome: "Feijão de Corda / Macáçar (1kg)", precoCometa: "R$ 8,20", precoSaoLuiz: "R$ 8,60", precoCenterbox: "R$ 8,00", precoFrangolandia: "R$ 8,40", dicaNutri: "Tradicional e muito magro em gorduras. Excelente densidade nutricional para marmitas da semana." },
 
-      // MACARRÃO
-      { nome: "Macarrão Espaguete Sêmola (500g)", precoCometa: "R$ 3,49", precoSaoLuiz: "R$ 3,89", precoCenterbox: "R$ 3,39", precoFrangolandia: "R$ 3,69", dicaNutri: "Carboidrato de rápida digestão. Cozinhe 'al dente' para manter o índice glicêmico mais baixo." },
-      { nome: "Macarrão Integral (500g)", precoCometa: "R$ 4,90", precoSaoLuiz: "R$ 5,40", precoCenterbox: "R$ 4,80", precoFrangolandia: "R$ 5,10", dicaNutri: "Contém farinha de trigo integral, garantindo maior teor de fibras e digestão mais lenta." },
+      // MASSAS / MACARRÃO
+      { nome: "Macarrão Espaguete Sêmola (500g)", precoCometa: "R$ 3,49", precoSaoLuiz: "R$ 3,89", precoCenterbox: "R$ 3,39", precoFrangolandia: "R$ 3,69", dicaNutri: "Massa versátil de rápida preparação. Sirva com molho de tomate natural enriquecido com ervas." },
+      { nome: "Macarrão Espaguete Integral (500g)", precoCometa: "R$ 4,90", precoSaoLuiz: "R$ 5,40", precoCenterbox: "R$ 4,80", precoFrangolandia: "R$ 5,10", dicaNutri: "Preserva a fibra do trigo. Promove absorção mais lenta de glicose, evitando picos de insulina." },
+      { nome: "Macarrão Penne Sêmola (500g)", precoCometa: "R$ 3,59", precoSaoLuiz: "R$ 3,99", precoCenterbox: "R$ 3,49", precoFrangolandia: "R$ 3,75", dicaNutri: "O formato curto retém melhor molhos de vegetais e carnes magras moídas (como patinho)." },
+      { nome: "Macarrão Penne Integral (500g)", precoCometa: "R$ 5,10", precoSaoLuiz: "R$ 5,50", precoCenterbox: "R$ 4,99", precoFrangolandia: "R$ 5,25", dicaNutri: "Opção excelente para saladas frias de macarrão com legumes picados e fonte proteica." },
 
-      // OUTROS BASCOS
-      { nome: "Leite Integral (1L)", precoCometa: "R$ 4,50", precoSaoLuiz: "R$ 4,80", precoCenterbox: "R$ 4,49", precoFrangolandia: "R$ 4,60", dicaNutri: "Fonte de cálcio de alta biodisponibilidade e proteínas. Mantém a gordura natural do leite." }
+      // OLEOS E GORDURAS
+      { nome: "Óleo de Soja (900ml)", precoCometa: "R$ 6,29", precoSaoLuiz: "R$ 6,69", precoCenterbox: "R$ 6,19", precoFrangolandia: "R$ 6,45", dicaNutri: "Fonte de ácidos graxos poli-insaturados. Utilize com moderação na cocção diária." },
+      { nome: "Azeite de Oliva Extra Virgem (500ml)", precoCometa: "R$ 38,90", precoSaoLuiz: "R$ 41,90", precoCenterbox: "R$ 37,90", precoFrangolandia: "R$ 39,50", dicaNutri: "Rico em gorduras monoinsaturadas e compostos fenólicos. Ideal para finalizar pratos frios e saladas." },
+
+      // LATICÍNIOS
+      { nome: "Leite Integral (1L)", precoCometa: "R$ 4,50", precoSaoLuiz: "R$ 4,80", precoCenterbox: "R$ 4,49", precoFrangolandia: "R$ 4,60", dicaNutri: "Fonte completa de cálcio e proteínas. Mantém a gordura natural importante para absorção de vitaminas lipossolúveis (A, D, E, K)." },
+      { nome: "Leite Desnatado (1L)", precoCometa: "R$ 4,60", precoSaoLuiz: "R$ 4,90", precoCenterbox: "R$ 4,55", precoFrangolandia: "R$ 4,70", dicaNutri: "Mesmo teor proteico e de cálcio do integral, mas com teor de gordura reduzido a quase zero." }
     ];
 
     function pesquisarProduto() {
@@ -184,11 +191,10 @@
         return;
       }
 
-      // Filtra qualquer produto cujo nome contenha a palavra digitada
       const resultadosEncontrados = produtos.filter(p => p.nome.toLowerCase().includes(termo));
 
       if (resultadosEncontrados.length === 0) {
-        conteinerResultados.innerHTML = `<p style='color: #666; margin-top: 12px;'>Nenhum produto encontrado para "<strong>${termo}</strong>". Tente buscar por 'Arroz', 'Feijão' ou 'Macarrão'.</p>`;
+        conteinerResultados.innerHTML = `<p style='color: #666; margin-top: 12px;'>Nenhum produto encontrado para "<strong>${termo}</strong>". Tente buscar por 'penne', 'espaguete' ou 'arroz'.</p>`;
         return;
       }
 
